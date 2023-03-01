@@ -1,0 +1,15 @@
+#! /bin/sh
+
+
+mute=$(pulsemixer --get-mute)
+vol=$(pulsemixer --get-volume | awk '{ print $1 }')
+
+[ "$mute" -eq 1 ] && echo "🔇 $vol%" && exit 
+
+case 1 in 
+    $((vol >= 70)) ) icon="🔊" ;;
+    $((vol >= 30)) ) icon="🔉" ;;
+    $((vol >= 1)) )  icon="🔈" ;;
+    * ) echo "🔇 $vol%" && exit ;; 
+esac
+echo "$icon $vol%"
