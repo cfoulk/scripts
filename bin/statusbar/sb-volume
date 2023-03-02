@@ -1,15 +1,15 @@
 #! /bin/sh
 
 
-mute=$(pulsemixer --get-mute)
-vol=$(pulsemixer --get-volume | awk '{ print $1 }')
+MUTED=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $3 }')
+VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }' | sed 's/\.//g' | sed 's/^0//')
 
-[ "$mute" -eq 1 ] && echo "🔇 $vol%" && exit 
+[[ "$MUTED" == "[MUTED]" ]] && echo "🔇 $VOL%" && exit 
 
 case 1 in 
-    $((vol >= 70)) ) icon="🔊" ;;
-    $((vol >= 30)) ) icon="🔉" ;;
-    $((vol >= 1)) )  icon="🔈" ;;
-    * ) echo "🔇 $vol%" && exit ;; 
+    $((VOL >= 70)) ) ICON="🔊" ;;
+    $((VOL >= 30)) ) ICON="🔉" ;;
+    $((VOL >= 01)) )  ICON="🔈" ;;
+    * ) echo "🔇 $VOL%" && exit ;; 
 esac
-echo "$icon $vol%"
+echo "$ICON $VOL%"
