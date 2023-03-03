@@ -4,7 +4,7 @@
 MUTED=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $3 }')
 VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }' | sed 's/\.//g' | sed 's/^0//')
 
-[[ "$MUTED" == "[MUTED]" ]] && echo "🔇 $VOL%" && exit 
+[ "$MUTED" = "[MUTED]" ] && echo "🔇 $VOL%" && exit 
 
 case 1 in 
     $((VOL >= 70)) ) ICON="🔊" ;;

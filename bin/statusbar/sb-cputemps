@@ -1,3 +1,3 @@
 #! /bin/sh
 
-sensors | awk '/Tdie:/ {print "💻 " $2} '
+sensors | awk '/CPUTIN:/ {print "💻 " $2} '
