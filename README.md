@@ -2,8 +2,6 @@
 
 ```bash
 📁bin
-├──📁learning-shell
-│   └──🎯lol.sh
 ├──📁statusbar
 │   ├──🎯sb-cputemps
 │   ├──🎯sb-date
